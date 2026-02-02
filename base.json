@@ -1,6 +1,14 @@
 {
   "afiliados": [
     {
+      "legajo": "000",
+      "nombre_apellido": "María Laura Colque",
+      "dni": 30221079,
+      "saldo_inicial_periodo": 90000.00,
+      "fecha_cierre_anterior": "2026-01-31",
+      "estado": "activo"
+    },
+    {
       "legajo": "001",
       "nombre_apellido": "Juan Pérez",
       "dni": 12345678,
