@@ -1,0 +1,69 @@
+{
+  "afiliados": [
+    {
+      "legajo": "001",
+      "nombre_apellido": "Juan Pérez",
+      "dni": 12345678,
+      "saldo_inicial_periodo": 50000.00,
+      "fecha_cierre_anterior": "2026-01-31",
+      "estado": "activo"
+    },
+    {
+      "legajo": "002",
+      "nombre_apellido": "María González",
+      "dni": 23456789,
+      "saldo_inicial_periodo": 75000.00,
+      "fecha_cierre_anterior": "2026-01-31",
+      "estado": "activo"
+    },
+    {
+      "legajo": "003",
+      "nombre_apellido": "Carlos Rodríguez",
+      "dni": 34567890,
+      "saldo_inicial_periodo": 120000.00,
+      "fecha_cierre_anterior": "2026-01-31",
+      "estado": "activo"
+    },
+    {
+      "legajo": "004",
+      "nombre_apellido": "Ana Martínez",
+      "dni": 45678901,
+      "saldo_inicial_periodo": 0.00,
+      "fecha_cierre_anterior": "2026-01-31",
+      "estado": "activo"
+    },
+    {
+      "legajo": "005",
+      "nombre_apellido": "Roberto Fernández",
+      "dni": 56789012,
+      "saldo_inicial_periodo": 250000.00,
+      "fecha_cierre_anterior": "2026-01-31",
+      "estado": "activo"
+    }
+  ],
+  "movimientos": [
+    {
+      "dni": 12345678,
+      "tipo": "orden",
+      "monto_total": 17000.00,
+      "cuotas": 1,
+      "fecha": "2026-02-01",
+      "descripcion": "Orden médica general",
+      "cuota_numero": 1
+    },
+    {
+      "dni": 23456789,
+      "tipo": "prestacion",
+      "monto_total": 1000000.00,
+      "cuotas": 10,
+      "fecha": "2026-02-01",
+      "descripcion": "Cirugía programada",
+      "cuota_numero": 1
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "ultima_actualizacion": "2026-02-02",
+    "periodo_actual": "2026-02"
+  }
+}

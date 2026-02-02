@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escencial - Gestión de Cuenta Corriente</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="./img/logo-escencial.png" alt="Logo Escencial" class="logo">
+            <h1 class="header-title">Sistema de Cuenta Corriente</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Search Section -->
+            <section class="search-section card">
+                <h2 class="section-title">Buscar Afiliado</h2>
+                <div class="search-controls">
+                    <div class="input-group">
+                        <label for="searchType">Buscar por:</label>
+                        <select id="searchType" class="input-select">
+                            <option value="dni">DNI</option>
+                            <option value="legajo">Legajo</option>
+                        </select>
+                    </div>
+                    <div class="input-group flex-grow">
+                        <label for="searchValue">Número:</label>
+                        <input type="text" id="searchValue" class="input-field" placeholder="Ingrese DNI o Legajo">
+                    </div>
+                    <button id="btnSearch" class="btn btn-primary">Buscar</button>
+                </div>
+            </section>
+
+            <!-- Affiliate Info Section -->
+            <section id="affiliateInfo" class="affiliate-info card hidden">
+                <div class="info-header">
+                    <h2 class="section-title">Información del Afiliado</h2>
+                    <span class="status-badge" id="statusBadge">Activo</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Legajo:</span>
+                        <span class="info-value" id="infoLegajo">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Nombre y Apellido:</span>
+                        <span class="info-value" id="infoNombre">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">DNI:</span>
+                        <span class="info-value" id="infoDni">-</span>
+                    </div>
+                    <div class="info-item highlight">
+                        <span class="info-label">Saldo Inicial Periodo:</span>
+                        <span class="info-value amount" id="infoSaldoInicial">$ 0.00</span>
+                    </div>
+                </div>
+
+                <!-- Balance Summary -->
+                <div class="balance-summary">
+                    <div class="balance-card">
+                        <span class="balance-label">Saldo Pendiente</span>
+                        <span class="balance-amount pending" id="saldoPendiente">$ 0.00</span>
+                    </div>
+                    <div class="balance-card">
+                        <span class="balance-label">Movimientos del Mes</span>
+                        <span class="balance-amount movements" id="movimientosMes">$ 0.00</span>
+                    </div>
+                    <div class="balance-card">
+                        <span class="balance-label">Saldo Final</span>
+                        <span class="balance-amount final" id="saldoFinal">$ 0.00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transaction Panel -->
+            <section id="transactionPanel" class="transaction-panel card hidden">
+                <h2 class="section-title">Cargar Nueva Transacción</h2>
+                
+                <div class="transaction-types">
+                    <button class="btn-type" data-type="orden" id="btnOrden">
+                        <span class="type-icon">📋</span>
+                        <span class="type-text">Nueva Orden</span>
+                    </button>
+                    <button class="btn-type" data-type="prestacion" id="btnPrestacion">
+                        <span class="type-icon">💳</span>
+                        <span class="type-text">Nueva Prestación</span>
+                    </button>
+                    <button class="btn-type" data-type="varios" id="btnVarios">
+                        <span class="type-icon">📝</span>
+                        <span class="type-text">Ajustes / Varios</span>
+                    </button>
+                </div>
+
+                <!-- Transaction Form -->
+                <div id="transactionForm" class="transaction-form hidden">
+                    <h3 class="form-title" id="formTitle">Nueva Transacción</h3>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="transactionType">Tipo de Movimiento:</label>
+                            <input type="text" id="transactionType" class="input-field" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="transactionAmount">Monto Total:</label>
+                            <input type="number" id="transactionAmount" class="input-field" placeholder="0.00" step="0.01" min="0">
+                        </div>
+
+                        <div class="form-group" id="cuotasGroup" style="display: none;">
+                            <label for="transactionCuotas">Cantidad de Cuotas:</label>
+                            <input type="number" id="transactionCuotas" class="input-field" placeholder="1" min="1" max="60" value="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transactionDate">Fecha:</label>
+                            <input type="date" id="transactionDate" class="input-field">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="transactionDesc">Descripción (opcional):</label>
+                            <textarea id="transactionDesc" class="input-field textarea" rows="3" placeholder="Detalles adicionales..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="btnCancelTransaction" class="btn btn-secondary">Cancelar</button>
+                        <button id="btnSaveTransaction" class="btn btn-success">Guardar Transacción</button>
+                    </div>
+
+                    <!-- Installment Preview -->
+                    <div id="installmentPreview" class="installment-preview hidden">
+                        <h4>Vista Previa de Cuotas</h4>
+                        <div id="installmentList" class="installment-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Movements History -->
+            <section id="movementsSection" class="movements-section card hidden">
+                <div class="section-header">
+                    <h2 class="section-title">Movimientos del Periodo</h2>
+                    <button id="btnExportMovements" class="btn btn-outline">Exportar</button>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table class="movements-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                                <th>Cuota</th>
+                                <th>Monto</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movementsTableBody">
+                            <tr>
+                                <td colspan="6" class="no-data">No hay movimientos para mostrar</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Procesando...</p>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification hidden">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <img src="./img/escencial-logo.png" alt="Logo Escencial" class="footer-logo">
+            <p class="footer-text">Sistema de Gestión de Cuenta Corriente © 2026</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
