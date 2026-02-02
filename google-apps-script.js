@@ -300,7 +300,7 @@ function generarReporteMensual() {
   reportSheet.autoResizeColumns(1, 8);
   const headerRange = reportSheet.getRange(4, 1, 1, 8);
   headerRange.setFontWeight('bold');
-  headerRange.setBackground('#1e3a8a');
+  headerRange.setBackground('#df8723');
   headerRange.setFontColor('#ffffff');
   
   Logger.log('Reporte generado: Reporte_' + mesActual);
